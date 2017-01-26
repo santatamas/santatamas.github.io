@@ -1,6 +1,48 @@
 <html>
-    <head></head>
+    <head>
+        <script src="https://code.jquery.com/jquery-1.9.1.min.js" integrity="sha256-wS9gmOZBqsqWxgIVgA8Y9WcQOa7PgSIX+rPA0VL2rbQ=" crossorigin="anonymous"></script>
+    </head>
     <body>
-        jquery form validation poc
+
+        <form action="/Claim/Details" id="ClaimDetailsForm" method="post">
+
+            <div class="checkbox-inline" id="TermsAccepted">
+                <label>
+            <input data-qa="terms and conditions agreement checkbox" data-val="true" data-val-required="Please accept the terms of use to continue." id="TermsAccepted" name="TermsAccepted" type="checkbox" value="true">
+            <input name="TermsAccepted" type="hidden" value="false">
+
+            </label>
+            </div>
+
+            <button id="submitButton" type="submit" class="btn btn-primary" data-qa="save and continue button" disabled="">Save and continue</button>
+        </form>
+
+        <script>
+
+            $(document).ready(function () {
+
+                $('#ClaimDetailsForm input').on('keyup blur', ValidateForm);
+
+                // Trigger form validation on date change, when first selecting
+                // the validation isn't updated.
+                $("#ReceiptDate").on('change', function () { $("input#ReceiptDate").valid() });
+
+                $('#TermsAccepted').on('change', ValidateForm);
+
+                ValidateForm();
+
+            });
+
+            function ValidateForm() {
+                if ($('#TermsAccepted:checked').length > 0) {
+                    $('#submitButton').prop('disabled', false);
+                } else {
+                    $('#submitButton').prop('disabled', 'disabled');
+                }
+            }
+
+
+        </script>
+
     </body>
 </html>
