@@ -14,6 +14,10 @@
             </label>
             </div>
 
+            <div id="poormans-console">
+
+            </div>
+
             <button id="submitButton" type="submit" class="btn btn-primary" data-qa="save and continue button" disabled="">Save and continue</button>
         </form>
 
@@ -21,11 +25,6 @@
 
             $(document).ready(function () {
 
-                $('#ClaimDetailsForm input').on('keyup blur', ValidateForm);
-
-                // Trigger form validation on date change, when first selecting
-                // the validation isn't updated.
-                $("#ReceiptDate").on('change', function () { $("input#ReceiptDate").valid() });
 
                 $('#TermsAccepted').on('change', ValidateForm);
 
@@ -34,11 +33,19 @@
             });
 
             function ValidateForm() {
+                log("validate called");
                 if ($('#TermsAccepted:checked').length > 0) {
                     $('#submitButton').prop('disabled', false);
                 } else {
                     $('#submitButton').prop('disabled', 'disabled');
                 }
+            }
+
+            function log(message)
+            {
+                $('#poormans-console').append(message);
+                $('#poormans-console').append("</br>");
+
             }
 
 
