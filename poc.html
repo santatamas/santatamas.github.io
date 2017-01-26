@@ -35,8 +35,10 @@
             function ValidateForm() {
                 log("validate called");
                 if ($('#TermsAccepted:checked').length > 0) {
+                                    log("checkbox: checked");
                     $('#submitButton').prop('disabled', false);
                 } else {
+                                    log("checkbox: unchecked");
                     $('#submitButton').prop('disabled', 'disabled');
                 }
             }
